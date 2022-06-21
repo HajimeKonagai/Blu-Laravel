@@ -92,7 +92,17 @@ class Controller
 
 		if ($request->order && $request->orderBy)
 		{
-			$q->orderBy($request->orderBy, $request->order);
+			if (isset($config[$request->orderBy]['sort']) && $config[$request->orderBy]['sort'])
+			{
+				if (is_string($config[$request->orderBy]['sort']))
+				{
+					$q->orderBy($config[$request->orderBy]['sort'], $request->order);
+				}
+				else
+				{
+					$q->orderBy($request->orderBy, $request->order);
+				}
+			}
 		}
 
 		$items = $q->paginate($request->perPage ?: static::$perPage); // TODO: perPage config?
