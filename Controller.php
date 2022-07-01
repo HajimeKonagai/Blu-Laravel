@@ -130,7 +130,7 @@ class Controller
 			$q
 		);
 
-		$q = static::queryWithSearch(
+		$q = static::queryWithOrder(
 			$request,
 			$config,
 			$q
@@ -153,7 +153,7 @@ class Controller
 			$q
 		);
 
-		$q = static::queryWithSearch(
+		$q = static::queryWithOrder(
 			$request,
 			$config,
 			$q
