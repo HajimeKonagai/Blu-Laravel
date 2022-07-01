@@ -47,7 +47,7 @@ class Controller
 		return $config;
 	}
 
-	public static function itemsWithSearch(
+	public static function queryWithSearch(
 		$request,
 		$config,
 		$q
@@ -90,6 +90,15 @@ class Controller
 			}
 		}
 
+		return $q;
+	}
+
+	public static function queryWithOrder(
+		$request,
+		$config,
+		$q
+	)
+	{
 		if ($request->order && $request->orderBy)
 		{
 			if (isset($config[$request->orderBy]['sort']) && $config[$request->orderBy]['sort'])
@@ -105,11 +114,55 @@ class Controller
 			}
 		}
 
+		return $q;
+	}
+
+
+	public static function queryWithSearchOrder(
+		$request,
+		$config,
+		$q
+	)
+	{
+		$q = static::queryWithSearch(
+			$request,
+			$config,
+			$q
+		);
+
+		$q = static::queryWithSearch(
+			$request,
+			$config,
+			$q
+		);
+
+		return $q;
+	}
+
+
+	public static function itemsWithSearchOrder(
+		$request,
+		$config,
+		$q
+	) // TODO: ver8 で名前つき引数に
+	{
+
+		$q = static::queryWithSearch(
+			$request,
+			$config,
+			$q
+		);
+
+		$q = static::queryWithSearch(
+			$request,
+			$config,
+			$q
+		);
+
 		$items = $q->paginate($request->perPage ?: static::$perPage); // TODO: perPage config?
 
 		return new ResourceCollection($items, $config);
 	}
-
 
 	/*
 	 * item with attributes
