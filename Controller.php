@@ -262,7 +262,6 @@ class Controller
 		$validator = Validator::make($item->toArray(), $coreRules);
 		$validator->setAttributeNames($coreAttributes);
 
-
 		if (!$validator->fails())
 		{
 			if ($live) $item->save();
@@ -453,8 +452,11 @@ class Controller
 
 		}
 
+	Log::debug(	$item );
 		$item->refresh();
 
+	Log::debug("refresh" );
+	Log::debug(	$item );
 		return [
 			'item' => $item,
 			'errors' => $errors,

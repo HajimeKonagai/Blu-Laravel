@@ -42,7 +42,6 @@ class Resource extends JsonResource
 				$arr[$value['attribute']] = $this->resource->{$value['attribute']};
 			}
 
-
 			if ($this->resource->{$field} && $value['type'] == 'datetime-local')
 			{
 				$arr[$field] = $this->resource->{$field}->format('Y-m-d\TH:i');
