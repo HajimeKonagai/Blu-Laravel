@@ -44,13 +44,14 @@ class Resource extends JsonResource
 
 			if ($this->resource->{$field} && $value['type'] == 'datetime-local')
 			{
-				$arr[$field] = $this->resource->{$field}->format('Y-m-d\TH:i');
+				$arr[$field] = $this->resource->{$field}->year > 0 ? $this->resource->{$field}->format('Y-m-d\TH:i'): '';
 			}
 
 			if ($this->resource->{$field} && $value['type'] == 'date')
 			{
-				$arr[$field] = $this->resource->{$field}->format('Y-m-d');
+				$arr[$field] = $this->resource->{$field}->year > 0 ? $this->resource->{$field}->format('Y-m-d') : '';
 			}
+
 
 
             /*
